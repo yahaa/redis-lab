@@ -1,0 +1,45 @@
+version: '3'
+services:
+  mymaster:
+    image: "redis"
+    ports:
+     - "6379:6379"
+    volumes:
+     - ./master.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf 
+  slave1:
+    image: "redis"
+    ports:
+     - "6380:6379"
+    volumes:
+     - ./slave1.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf 
+  slave2:
+    image: "redis"
+    ports:
+     - "6381:6379"
+    volumes:
+     - ./slave2.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+  sentinel1:
+    image: "redis"
+    ports:
+      - "26379:26379"
+    volumes:
+     - ./sentinel1.conf:/usr/local/etc/redis/sentinel.conf
+    command: redis-server /usr/local/etc/redis/sentinel.conf --sentinel 
+  sentinel2:
+    image: "redis"
+    ports:
+      - "36379:26379"
+    volumes:
+     - ./sentinel2.conf:/usr/local/etc/redis/sentinel.conf
+    command: redis-server /usr/local/etc/redis/sentinel.conf --sentinel 
+  sentinel3:
+    image: "redis"
+    ports:
+      - "46379:26379"
+    volumes:
+     - ./sentinel3.conf:/usr/local/etc/redis/sentinel.conf
+    command: redis-server /usr/local/etc/redis/sentinel.conf --sentinel 
+    
